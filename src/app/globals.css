@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #121816;
+  --stone: #eef2ef;
+  --sand: #dce5df;
+  --copper: #2f6a56;
+  --copper-deep: #1f4d3e;
+  --mute: #5a6660;
+  --line: rgba(18, 24, 22, 0.12);
+  --ok: #2f6f4e;
+  --warn: #9a6b1f;
+  --danger: #9b3b3b;
+  --background: var(--stone);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--ink);
+  --color-stone: var(--stone);
+  --color-sand: var(--sand);
+  --color-copper: var(--copper);
+  --color-copper-deep: var(--copper-deep);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(184, 106, 61, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(26, 23, 20, 0.06), transparent 50%),
+    var(--stone);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.85rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--stone);
+}
+
+.btn-primary:hover {
+  background: var(--copper-deep);
+}
+
+.btn-accent {
+  background: var(--copper);
+  color: white;
+}
+
+.btn-accent:hover {
+  background: var(--copper-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.field {
+  width: 100%;
+  min-height: 2.85rem;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 0.85rem;
+  padding: 0.7rem 0.9rem;
+  color: var(--ink);
+}
+
+.field:focus {
+  outline: 2px solid rgba(184, 106, 61, 0.35);
+  border-color: var(--copper);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s ease both;
+}
+
+.animate-rise-delay {
+  animation: rise 0.8s ease 0.12s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 0.85s ease 0.22s both;
 }

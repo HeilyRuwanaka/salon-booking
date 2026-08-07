@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ranu Salon — Online Booking
 
-## Getting Started
+Real salon website for **Ranu Salon** (Sri Lanka): public booking + **mobile phone admin**.
 
-First, run the development server:
+Built to learn by doing, then put a live link on your CV.
+
+## What this project is
+
+| Who | What they do |
+|-----|----------------|
+| Customer | Opens site → Book Now → service → date/time → name/phone |
+| Owner (phone) | Logs into `/admin` → confirm / cancel / reschedule / close days |
+
+**Stack (learn these names for interviews):**
+
+- **Next.js + React + TypeScript** — the website
+- **Tailwind CSS** — styling
+- **Supabase** — online database (bookings, services, closed days)
+- Later: **Vercel** (live internet URL)
+
+## Run on your PC (today — no accounts needed)
 
 ```bash
+cd salon-booking
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Public site: `/` `/about` `/services` `/contact` `/book`
+- Owner admin: `/admin/login`
+- **Local admin password:** `ranu1234`  
+  (change with env `ADMIN_PASSWORD` later)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Easy places to edit later
 
-## Learn More
+| File | What |
+|------|------|
+| `src/lib/salon.config.ts` | Name, phone, hours, address, map, images |
+| Admin → Services | Prices and durations |
+| Admin → Closed | Days salon is shut |
 
-To learn more about Next.js, take a look at the following resources:
+## Project folders (plain English)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/app/           → pages (Home, Book, Admin…)
+src/app/api/       → server actions (save bookings, login…)
+src/components/    → reusable UI pieces
+src/lib/           → config, database helpers, slot logic
+supabase/schema.sql → SQL that creates the tables
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` → `.env.local` and add your Supabase keys (never commit `.env.local`).
 
-## Deploy on Vercel
+## Learning path (what we do next)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. ✅ Run locally and click through booking + admin  
+2. ✅ Create **Supabase** project + keys in `.env.local`  
+3. ✅ Run `supabase/schema.sql` in Supabase SQL Editor  
+4. ✅ Create **GitHub** → push code  
+5. Create **Vercel** → live URL for your friend + CV (add the same env vars there) 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Interview one-liner
+
+> I built a live booking site for a friend’s salon who only has a phone: customers book online, he confirms and can close days when sick, and we used Next.js with a clear path to Supabase + Vercel for free hosting.
