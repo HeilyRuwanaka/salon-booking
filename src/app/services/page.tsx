@@ -21,8 +21,8 @@ export default async function ServicesPage() {
           Time &amp; price, clearly listed
         </h1>
         <p className="mt-4 text-mute">
-          Sample prices for now — the owner can update these from the phone admin
-          when the final list is ready.
+          Duration and price for each service. The owner can update this list
+          anytime from the phone admin.
         </p>
       </div>
 

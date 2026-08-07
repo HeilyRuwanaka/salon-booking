@@ -17,7 +17,7 @@ export function Footer() {
         </div>
         <div className="text-sm">
           <p className="font-semibold uppercase tracking-wide text-sand/70">Hours</p>
-          <p className="mt-2">Every day · 1:00 PM – 12:00 AM</p>
+          <p className="mt-2">{salon.hoursLabel}</p>
           <p className="mt-4 font-semibold uppercase tracking-wide text-sand/70">Contact</p>
           <p className="mt-2">
             <a className="underline decoration-copper/60" href={telUrl()}>
@@ -29,6 +29,7 @@ export function Footer() {
               WhatsApp
             </a>
           </p>
+          <p className="mt-4 text-sand/80">{salon.address}</p>
         </div>
         <div className="flex flex-col gap-2 text-sm">
           <Link href="/services" className="hover:text-copper">
@@ -36,6 +37,9 @@ export function Footer() {
           </Link>
           <Link href="/book" className="hover:text-copper">
             Book appointment
+          </Link>
+          <Link href="/qr" className="hover:text-copper">
+            Shop QR code
           </Link>
           <Link href="/admin/login" className="text-sand/50 hover:text-sand">
             Owner login

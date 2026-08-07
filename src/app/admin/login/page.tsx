@@ -36,8 +36,8 @@ export default function AdminLoginPage() {
       <p className="font-display text-3xl">{salon.name}</p>
       <h1 className="mt-2 text-xl font-semibold">Owner login</h1>
       <p className="mt-2 text-sm text-mute">
-        For the phone admin. Default local password is in the README (change later
-        with Supabase).
+        For the phone admin. Password is set with the ADMIN_PASSWORD env value
+        (see README).
       </p>
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <label className="block">

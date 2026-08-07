@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 
 export const ADMIN_COOKIE = "ranu_admin_session";
 
-/** Local learning password — replace with Supabase Auth later */
+/** Admin password from env — set ADMIN_PASSWORD in .env.local and Vercel */
 export function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD || "ranu1234";
+  return process.env.ADMIN_PASSWORD || "RanuBook2026";
 }
 
 export async function isAdminLoggedIn() {
