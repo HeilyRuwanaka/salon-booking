@@ -61,6 +61,4 @@ Copy `.env.example` → `.env.local` and add your Supabase keys (never commit `.
 4. ✅ Create **GitHub** → push code  
 5. Create **Vercel** → live URL for your friend + CV (add the same env vars there) 
 
-## Interview one-liner
 
-> I built a live booking site for a friend’s salon who only has a phone: customers book online, he confirms and can close days when sick, and we used Next.js with a clear path to Supabase + Vercel for free hosting.
