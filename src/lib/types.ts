@@ -2,7 +2,8 @@ export type BookingStatus =
   | "pending"
   | "confirmed"
   | "completed"
-  | "cancelled";
+  | "cancelled"
+  | "no_show";
 
 export type Service = {
   id: string;

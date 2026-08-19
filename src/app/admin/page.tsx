@@ -14,7 +14,8 @@ export default async function AdminPage() {
     <AdminShell>
       <h1 className="mb-3 text-lg font-semibold">Today &amp; bookings</h1>
       <p className="mb-4 text-sm text-mute">
-        Confirm, cancel, mark done, or reschedule. Tap Call / WhatsApp to reach the customer.
+        Confirm, cancel, mark done / no-show, or reschedule. Walk-in, notes, search,
+        and WhatsApp confirm text are on each card.
       </p>
       <AdminBookings initialBookings={bookings} services={services} />
     </AdminShell>

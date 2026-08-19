@@ -7,6 +7,8 @@ const tabs = [
   { href: "/admin", label: "Bookings" },
   { href: "/admin/closed", label: "Closed" },
   { href: "/admin/services", label: "Services" },
+  { href: "/admin/reports", label: "Reports" },
+  { href: "/admin/settings", label: "Settings" },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -28,7 +30,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             Log out
           </button>
         </div>
-        <nav className="mt-3 grid grid-cols-3 gap-2">
+        <nav className="mt-3 grid grid-cols-5 gap-1.5">
           {tabs.map((t) => {
             const active =
               t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
@@ -36,7 +38,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={t.href}
                 href={t.href}
-                className={`rounded-xl py-2.5 text-center text-sm font-semibold ${
+                className={`rounded-xl py-2.5 text-center text-[11px] font-semibold leading-tight sm:text-sm ${
                   active ? "bg-ink text-stone" : "bg-sand text-ink"
                 }`}
               >

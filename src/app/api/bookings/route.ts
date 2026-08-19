@@ -21,13 +21,20 @@ export async function POST(request: Request) {
   const customerName = String(body.customerName || "").trim();
   const customerPhone = String(body.customerPhone || "").trim();
   const startsAt = String(body.startsAt || "");
+  const notes = body.notes ? String(body.notes).trim() : undefined;
+  const walkIn = body.walkIn === true;
+  const admin = await isAdminLoggedIn();
+
+  if (walkIn && !admin) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   if (!serviceId || !customerName || !customerPhone || !startsAt) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
   const service = await getService(serviceId);
-  if (!service || !service.isActive) {
+  if (!service || (!service.isActive && !walkIn)) {
     return NextResponse.json({ error: "Service not found" }, { status: 404 });
   }
 
@@ -44,22 +51,39 @@ export async function POST(request: Request) {
   }).format(start);
 
   const [bookings, closedDays] = await Promise.all([listBookings(), listClosedDays()]);
-  const available = getAvailableSlots({
-    dateKey,
-    service,
-    bookings,
-    closedDays,
-  });
 
-  if (!available.includes(start.toISOString()) && !available.includes(startsAt)) {
-    // Compare by timestamp in case of Z vs offset string differences
-    const startMs = start.getTime();
-    const ok = available.some((s) => new Date(s).getTime() === startMs);
-    if (!ok) {
-      return NextResponse.json(
-        { error: "That time is no longer available. Pick another slot." },
-        { status: 409 },
-      );
+  if (!walkIn) {
+    const available = getAvailableSlots({
+      dateKey,
+      service,
+      bookings,
+      closedDays,
+    });
+
+    if (!available.includes(start.toISOString()) && !available.includes(startsAt)) {
+      const startMs = start.getTime();
+      const ok = available.some((s) => new Date(s).getTime() === startMs);
+      if (!ok) {
+        return NextResponse.json(
+          { error: "That time is no longer available. Pick another slot." },
+          { status: 409 },
+        );
+      }
+    }
+  } else {
+    // Walk-in: still block closed days and hard overlaps with pending/confirmed
+    if (closedDays.some((d) => d.date === dateKey)) {
+      return NextResponse.json({ error: "Salon is closed that day" }, { status: 409 });
+    }
+    const endsMs = start.getTime() + service.durationMinutes * 60 * 1000;
+    const conflict = bookings.some((b) => {
+      if (b.status !== "pending" && b.status !== "confirmed") return false;
+      const bs = new Date(b.startsAt).getTime();
+      const be = new Date(b.endsAt).getTime();
+      return start.getTime() < be && bs < endsMs;
+    });
+    if (conflict) {
+      return NextResponse.json({ error: "Overlaps another booking" }, { status: 409 });
     }
   }
 
@@ -70,6 +94,8 @@ export async function POST(request: Request) {
     customerPhone,
     startsAt: start.toISOString(),
     endsAt,
+    notes,
+    status: walkIn ? "confirmed" : "pending",
   });
 
   return NextResponse.json(booking, { status: 201 });
