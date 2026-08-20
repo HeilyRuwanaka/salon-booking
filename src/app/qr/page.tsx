@@ -54,8 +54,7 @@ export default function QrPosterPage() {
       </div>
 
       <p className="mt-8 max-w-md text-sm text-mute print:hidden">
-        Tip: use Print or “Save as PDF”, then put the poster by the shop door.
-        No paid domain needed — this QR uses your free Vercel link.
+        Print this page or save as PDF, then place it by the shop door.
       </p>
     </div>
   );

@@ -128,7 +128,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
         <div className="space-y-3">
           <h2 className="font-display text-2xl">Select a service</h2>
           <p className="text-sm text-mute">
-            Longer services need a longer free block (e.g. 45 min needs 45 free minutes).
+            Times are blocked for the full service length.
           </p>
           {services.map((s) => (
             <button
@@ -144,7 +144,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="font-semibold">{s.name}</p>
-                  <p className="text-sm text-mute">{s.durationMinutes} min session</p>
+                  <p className="text-sm text-mute">{s.durationMinutes} min</p>
                 </div>
                 <p className="font-semibold">LKR {s.priceLkr.toLocaleString("en-LK")}</p>
               </div>

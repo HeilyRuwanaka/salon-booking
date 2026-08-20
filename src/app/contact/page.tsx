@@ -15,7 +15,7 @@ export default function ContactPage() {
           Contact
         </p>
         <h1 className="font-display mt-3 text-4xl tracking-tight text-ink sm:text-5xl">
-          Get in touch
+          Contact
         </h1>
 
         <div className="mt-10 grid gap-10 border-y border-line py-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -68,7 +68,7 @@ export default function ContactPage() {
               Book
             </p>
             <p className="mt-3 text-sm text-mute">
-              Reserve a time online — fast on your phone.
+              Book a time online in a few steps.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link href="/book" className="btn btn-accent text-sm">
@@ -96,7 +96,7 @@ export default function ContactPage() {
           />
         </div>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
-          <p className="text-sm text-mute">Pin shows the salon location.</p>
+          <p className="text-sm text-mute">Salon location</p>
           {salon.mapUrl && (
             <a
               href={salon.mapUrl}

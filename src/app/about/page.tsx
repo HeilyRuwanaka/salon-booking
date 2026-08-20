@@ -32,10 +32,6 @@ export default function AboutPage() {
             {salon.aboutParagraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
-            <p>
-              Run by {salon.ownerName}. Prefer a chat first? WhatsApp us, or book
-              a slot online and we will confirm.
-            </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/book" className="btn btn-primary">

@@ -321,7 +321,7 @@ export function AdminBookings({ initialBookings, services }: Props) {
           </p>
         )}
         <button type="button" className="mt-2 text-xs underline text-mute" onClick={requestNotify}>
-          Enable browser alerts
+          Enable alerts
         </button>
       </div>
 

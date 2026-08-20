@@ -16,17 +16,17 @@ export default async function BookSuccessPage({
   return (
     <div className="mx-auto max-w-xl px-4 py-16 text-center sm:px-6">
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
-        Request received
+        Booking sent
       </p>
       <h1 className="font-display mt-3 text-4xl tracking-tight">
-        Thanks — we got your booking
+        Thank you
       </h1>
       <p className="mt-4 text-mute">
-        Status is <strong>pending</strong> until the salon confirms on their phone.
-        Keep your WhatsApp on.
+        We’ve received your request. The salon will confirm soon — keep WhatsApp
+        nearby.
       </p>
       {sp.id && (
-        <p className="mt-2 text-xs text-mute">Ref: {sp.id}</p>
+        <p className="mt-2 text-xs text-mute">Booking ID: {sp.id}</p>
       )}
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Link href="/" className="btn btn-primary">

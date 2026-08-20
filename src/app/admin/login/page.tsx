@@ -70,8 +70,7 @@ export default function AdminLoginPage() {
       <div className="mx-auto max-w-md px-4 py-8">
         <h1 className="text-xl font-semibold">Owner login</h1>
         <p className="mt-2 text-sm text-mute">
-          For the phone admin. Use the password from Settings (or the bootstrap
-          ADMIN_PASSWORD until you change it once).
+          Enter your password to open the admin panel.
         </p>
         <form onSubmit={onSubmit} className="mt-8 space-y-4">
           <label className="block">

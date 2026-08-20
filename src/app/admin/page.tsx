@@ -12,10 +12,9 @@ export default async function AdminPage() {
 
   return (
     <AdminShell>
-      <h1 className="mb-3 text-lg font-semibold">Today &amp; bookings</h1>
+      <h1 className="mb-3 text-lg font-semibold">Bookings</h1>
       <p className="mb-4 text-sm text-mute">
-        Confirm, cancel, mark done / no-show, or reschedule. Walk-in, notes, search,
-        and WhatsApp confirm text are on each card.
+        Confirm, cancel, mark done, or add a walk-in.
       </p>
       <AdminBookings initialBookings={bookings} services={services} />
     </AdminShell>

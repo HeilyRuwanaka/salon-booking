@@ -10,10 +10,9 @@ export default async function AdminReportsPage() {
 
   return (
     <AdminShell>
-      <h1 className="mb-3 text-lg font-semibold">Reports &amp; earnings</h1>
+      <h1 className="mb-3 text-lg font-semibold">Reports</h1>
       <p className="mb-4 text-sm text-mute">
-        Daily, weekly, or monthly totals from completed bookings. Download a PDF for
-        your records.
+        Earnings from completed bookings. Download a PDF if you need it.
       </p>
       <AdminReports />
     </AdminShell>

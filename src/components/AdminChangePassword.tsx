@@ -43,7 +43,7 @@ export function AdminChangePassword() {
     <form onSubmit={onSubmit} className="space-y-3 rounded-2xl border border-line bg-white p-4">
       <h2 className="font-semibold">Change admin password</h2>
       <p className="text-sm text-mute">
-        Saved securely in the database (hashed). Use this instead of editing Vercel each time.
+        Choose a new password for the admin panel.
       </p>
 
       <label className="block text-sm">

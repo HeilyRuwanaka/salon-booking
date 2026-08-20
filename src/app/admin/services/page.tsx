@@ -13,7 +13,7 @@ export default async function AdminServicesPage() {
     <AdminShell>
       <h1 className="mb-3 text-lg font-semibold">Services</h1>
       <p className="mb-4 text-sm text-mute">
-        Add new services or edit name, minutes, and price. Hide ones you don’t offer.
+        Edit names, times, and prices. Hide services you’re not offering.
       </p>
       <AdminServices initial={services} />
     </AdminShell>

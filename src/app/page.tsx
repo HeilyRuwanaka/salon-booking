@@ -73,10 +73,10 @@ export default async function HomePage() {
             Services
           </p>
           <h2 className="font-display mt-3 text-3xl tracking-tight text-ink sm:text-4xl">
-            Clear time and price
+            Services &amp; prices
           </h2>
           <p className="mt-3 max-w-xl text-mute">
-            Pick a service, choose a slot, and we confirm.
+            Pick what you need, then book a time that works.
           </p>
 
           {servicesError && (
@@ -145,29 +145,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="section-pad border-t border-line bg-ink text-stone">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sand/60">
-            Reviews
-          </p>
-          <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">
-            What clients say
-          </h2>
-          <ul className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
-            {salon.reviews.map((r) => (
-              <li key={r.quote} className="border-t border-white/12 pt-6">
-                <blockquote className="text-base leading-relaxed text-sand/90">
-                  “{r.quote}”
-                </blockquote>
-                <p className="mt-4 text-sm font-semibold text-stone">{r.name}</p>
-                <p className="text-sm text-sand/55">{r.detail}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* Visit */}
       <section className="section-pad border-t border-line bg-surface">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -175,7 +152,7 @@ export default async function HomePage() {
             Visit
           </p>
           <h2 className="font-display mt-3 text-3xl tracking-tight text-ink sm:text-4xl">
-            Find us &amp; get in touch
+            Find us
           </h2>
           <div className="mt-10 grid gap-8 border-y border-line py-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
@@ -194,7 +171,7 @@ export default async function HomePage() {
                 href={whatsappUrl("Hi, I want to book at Ranu Salon")}
                 className="mt-2 block font-semibold text-ink hover:text-copper-deep"
               >
-                Chat to book
+                Message us
               </a>
             </div>
             <div>
@@ -219,10 +196,7 @@ export default async function HomePage() {
               Book Now
             </Link>
             <Link href="/contact" className="btn btn-ghost">
-              Contact details
-            </Link>
-            <Link href="/qr" className="btn btn-ghost">
-              Shop QR code
+              Contact
             </Link>
           </div>
         </div>

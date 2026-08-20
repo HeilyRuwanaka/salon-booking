@@ -22,11 +22,10 @@ export default async function BookPage({
         Book now
       </p>
       <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
-        Reserve your time
+        Book an appointment
       </h1>
       <p className="mt-3 mb-10 max-w-xl text-mute">
-        Choose a service, pick a free slot, and we will confirm from the salon.
-        No online payment — pay when you visit.
+        Choose a service and time. Pay at the salon when you visit.
       </p>
       <BookingWizard services={services} initialServiceId={sp.service} />
     </div>

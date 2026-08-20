@@ -19,10 +19,10 @@ export default async function ServicesPage() {
           Services
         </p>
         <h1 className="font-display mt-3 text-4xl tracking-tight text-ink sm:text-5xl">
-          Time &amp; price, clearly listed
+          Services
         </h1>
         <p className="mt-4 text-mute">
-          Duration and price for each service.
+          Minutes and prices for each service.
         </p>
       </div>
 
