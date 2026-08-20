@@ -23,9 +23,12 @@ export function Header() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <header className="sticky top-0 z-40 border-t-2 border-copper bg-ink">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <BrandLogo height={60} priority />
+    <header
+      className="sticky top-0 z-40 border-t-2 border-copper"
+      style={{ backgroundColor: "#010101" }}
+    >
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5">
+        <BrandLogo height={76} priority />
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
           {links.map((l) => {
@@ -75,7 +78,8 @@ export function Header() {
       {open && (
         <nav
           id="mobile-nav"
-          className="border-t border-white/10 bg-ink px-4 py-3 md:hidden"
+          className="border-t border-white/10 px-4 py-3 md:hidden"
+          style={{ backgroundColor: "#010101" }}
           aria-label="Mobile"
         >
           <div className="flex flex-col gap-1">

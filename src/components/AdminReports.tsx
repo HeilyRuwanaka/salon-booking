@@ -73,7 +73,7 @@ export function AdminReports() {
           s.earningsLkr.toLocaleString("en-LK"),
         ]),
         styles: { fontSize: 9 },
-        headStyles: { fillColor: [12, 12, 12], textColor: [182, 158, 102] },
+        headStyles: { fillColor: [1, 1, 1], textColor: [182, 158, 102] },
       });
     }
 

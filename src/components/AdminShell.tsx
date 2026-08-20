@@ -70,10 +70,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto min-h-[100dvh] max-w-lg bg-stone">
-      <header className="sticky top-0 z-30 overflow-visible border-t-2 border-copper bg-ink">
-        <div className="flex items-center justify-between gap-3 px-4 py-3">
+      <header
+        className="sticky top-0 z-30 overflow-visible border-t-2 border-copper"
+        style={{ backgroundColor: "#010101" }}
+      >
+        <div className="flex items-center justify-between gap-3 px-4 py-4">
           <div className="flex min-w-0 items-center gap-3">
-            <BrandLogo href="/admin" height={52} priority />
+            <BrandLogo href="/admin" height={68} priority />
             <div className="min-w-0">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-copper">
                 Admin
@@ -89,8 +92,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             Log out
           </button>
         </div>
-        <nav className="grid grid-cols-5 gap-1 overflow-visible border-t border-white/10 bg-ink px-2 pb-2.5 pt-2">
-          {tabs.map((t) => {
+        <nav
+          className="grid grid-cols-5 gap-1 overflow-visible border-t border-white/10 px-2 pb-3 pt-2"
+          style={{ backgroundColor: "#010101" }}
+        >          {tabs.map((t) => {
             const active =
               t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
             const showBadge = "badge" in t && t.badge && pendingCount > 0;

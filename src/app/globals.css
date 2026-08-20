@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand: black + logo gold (sampled from official mark) */
-  --ink: #0c0c0c;
+  /* Brand: logo black (#010101) + logo gold */
+  --ink: #010101;
+  --brand-black: #010101;
   --stone: #f5f5f4;
   --sand: #e8e4db;
   --copper: #b69e66;
   --copper-deep: #8f7844;
   --mute: #6a6560;
-  --line: rgba(12, 12, 12, 0.1);
+  --line: rgba(1, 1, 1, 0.1);
   --ok: #2f6f4e;
   --warn: #9a6b1f;
   --danger: #9b3b3b;
@@ -21,6 +22,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
+  --color-brand-black: var(--brand-black);
   --color-stone: var(--stone);
   --color-sand: var(--sand);
   --color-copper: var(--copper);
@@ -76,7 +78,7 @@ body {
 }
 
 .btn-primary {
-  background: var(--ink);
+  background: var(--brand-black);
   color: #f5f5f4;
 }
 
