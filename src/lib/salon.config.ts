@@ -20,9 +20,9 @@ export const salon = {
   /** WhatsApp link uses country code without + */
   whatsapp: "94767771719",
   email: "",
-  /** Street address — replace with full line when owner confirms */
-  address: "Sri Lanka (map pin set)",
-  addressNote: "Tap Open map for the exact salon location.",
+  /** Street address */
+  address: "130/A1, Pitipana South, Arachigoda, Homagama",
+  addressNote: "Tap Open map for directions.",
   mapUrl: "https://maps.app.goo.gl/3GZUynmhE7sseKNXA",
   /** Approx coordinates from Google Maps share (for reference) */
   mapLat: 6.820859,
