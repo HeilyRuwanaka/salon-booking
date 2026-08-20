@@ -17,10 +17,6 @@ export default function ContactPage() {
         <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
           Get in touch
         </h1>
-        <p className="mt-4 max-w-xl text-mute">
-          Call, WhatsApp, or book online. Find us on the map below — no forms,
-          just the details you need.
-        </p>
 
         <div className="mt-10 grid gap-10 border-y border-line py-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
