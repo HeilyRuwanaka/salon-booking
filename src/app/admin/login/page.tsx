@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BrandLogo } from "@/components/BrandLogo";
 import { PasswordField } from "@/components/PasswordField";
+import { salon } from "@/lib/salon.config";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -33,31 +34,64 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[100dvh] max-w-md flex-col justify-center px-4 py-10">
-      <BrandLogo href="/" height={120} priority className="rounded-sm" />
-      <h1 className="mt-6 text-xl font-semibold">Owner login</h1>
-      <p className="mt-2 text-sm text-mute">
-        For the phone admin. Use the password from Settings (or the bootstrap
-        ADMIN_PASSWORD until you change it once).
-      </p>
-      <form onSubmit={onSubmit} className="mt-8 space-y-4">
-        <label className="block">
-          <span className="mb-1 block text-sm text-mute">Password</span>
-          <PasswordField
-            className="text-lg"
-            value={password}
-            onChange={setPassword}
-            autoComplete="current-password"
-            inputMode="text"
-          />
-        </label>
-        {error && (
-          <p className="rounded-xl bg-danger/10 px-3 py-2 text-sm text-danger">{error}</p>
-        )}
-        <button type="submit" className="btn btn-primary w-full text-lg" disabled={loading}>
-          {loading ? "Signing in…" : "Open admin"}
-        </button>
-      </form>
+    <div className="min-h-[100dvh] bg-stone">
+      {/* Hero-style brand band — logo only, no buttons/copy */}
+      <section className="relative h-52 overflow-hidden bg-[#010101] sm:h-60">
+        <Image
+          src={salon.heroImage}
+          alt=""
+          fill
+          priority
+          className="object-cover object-[center_30%] scale-105"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-[#010101]/75 to-[#010101]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#010101]/55 via-transparent to-transparent" />
+
+        <div className="relative flex h-full items-end px-5 pb-6 sm:px-8 sm:pb-7">
+          <div className="hero-logo-mark">
+            <Image
+              src={salon.logoMarkImage}
+              alt={salon.name}
+              width={320}
+              height={256}
+              priority
+              className="h-auto w-40 object-contain object-left sm:w-48"
+            />
+            <div
+              className="mt-4 h-px w-20 bg-gradient-to-r from-copper via-copper/70 to-transparent sm:w-24"
+              aria-hidden
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Login form — same as before */}
+      <div className="mx-auto max-w-md px-4 py-8">
+        <h1 className="text-xl font-semibold">Owner login</h1>
+        <p className="mt-2 text-sm text-mute">
+          For the phone admin. Use the password from Settings (or the bootstrap
+          ADMIN_PASSWORD until you change it once).
+        </p>
+        <form onSubmit={onSubmit} className="mt-8 space-y-4">
+          <label className="block">
+            <span className="mb-1 block text-sm text-mute">Password</span>
+            <PasswordField
+              className="text-lg"
+              value={password}
+              onChange={setPassword}
+              autoComplete="current-password"
+              inputMode="text"
+            />
+          </label>
+          {error && (
+            <p className="rounded-xl bg-danger/10 px-3 py-2 text-sm text-danger">{error}</p>
+          )}
+          <button type="submit" className="btn btn-primary w-full text-lg" disabled={loading}>
+            {loading ? "Signing in…" : "Open admin"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
