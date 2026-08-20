@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { salon } from "@/lib/salon.config";
 import type { Booking } from "@/lib/types";
 
@@ -20,45 +20,46 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   const [pendingCount, setPendingCount] = useState(0);
   const prevPending = useRef<number | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
+  const refreshPending = useCallback(async () => {
+    try {
+      const res = await fetch("/api/bookings", { cache: "no-store" });
+      if (!res.ok) return;
+      const data = (await res.json()) as Booking[];
+      const count = data.filter((b) => b.status === "pending").length;
 
-    async function tick() {
-      try {
-        const res = await fetch("/api/bookings");
-        if (!res.ok || cancelled) return;
-        const data = (await res.json()) as Booking[];
-        const count = data.filter((b) => b.status === "pending").length;
-        if (cancelled) return;
-
-        const prev = prevPending.current;
-        if (prev !== null && count > prev) {
-          const added = count - prev;
-          if (typeof window !== "undefined" && "Notification" in window) {
-            if (Notification.permission === "granted") {
-              new Notification(`${salon.name}: new booking`, {
-                body: `${added} new pending booking${added === 1 ? "" : "s"} — open Bookings.`,
-              });
-            }
+      const prev = prevPending.current;
+      if (prev !== null && count > prev) {
+        const added = count - prev;
+        if (typeof window !== "undefined" && "Notification" in window) {
+          if (Notification.permission === "granted") {
+            new Notification(`${salon.name}: new booking`, {
+              body: `${added} new pending booking${added === 1 ? "" : "s"} — open Bookings.`,
+            });
           }
         }
-        prevPending.current = count;
-        setPendingCount(count);
-      } catch {
-        /* ignore */
       }
+      prevPending.current = count;
+      setPendingCount(count);
+    } catch {
+      /* ignore */
     }
+  }, []);
 
-    void tick();
-    const onChange = () => void tick();
+  useEffect(() => {
+    void refreshPending();
+    const onChange = () => void refreshPending();
+    const onFocus = () => void refreshPending();
     window.addEventListener("admin-bookings-changed", onChange);
-    const id = window.setInterval(tick, 20000);
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onFocus);
+    const id = window.setInterval(refreshPending, 12000);
     return () => {
-      cancelled = true;
       window.clearInterval(id);
       window.removeEventListener("admin-bookings-changed", onChange);
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onFocus);
     };
-  }, []);
+  }, [refreshPending]);
 
   async function logout() {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -68,14 +69,14 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto min-h-[100dvh] max-w-lg bg-stone">
-      <header className="sticky top-0 z-30 border-b border-line bg-stone/95 px-4 py-3 backdrop-blur">
+      <header className="sticky top-0 z-30 overflow-visible border-b border-line bg-stone/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center justify-between">
           <p className="font-display text-xl">Ranu Admin</p>
           <button type="button" onClick={logout} className="text-sm text-mute underline">
             Log out
           </button>
         </div>
-        <nav className="mt-3 grid grid-cols-5 gap-1.5">
+        <nav className="mt-3 grid grid-cols-5 gap-1.5 overflow-visible pt-1">
           {tabs.map((t) => {
             const active =
               t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
@@ -84,14 +85,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={t.href}
                 href={t.href}
-                className={`relative rounded-xl py-2.5 text-center text-[11px] font-semibold leading-tight sm:text-sm ${
+                className={`relative overflow-visible rounded-xl py-2.5 text-center text-[11px] font-semibold leading-tight sm:text-sm ${
                   active ? "bg-ink text-stone" : "bg-sand text-ink"
                 }`}
               >
                 {t.label}
                 {showBadge && (
                   <span
-                    className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold text-white"
+                    className="absolute right-0 top-0 z-20 flex h-[1.15rem] min-w-[1.15rem] -translate-y-1/3 translate-x-1/4 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white shadow-sm"
+                    style={{ background: "#c0392b" }}
                     aria-label={`${pendingCount} pending bookings`}
                   >
                     {pendingCount > 9 ? "9+" : pendingCount}
