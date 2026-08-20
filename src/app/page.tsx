@@ -5,7 +5,13 @@ import { listServices } from "@/lib/store";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const services = (await listServices(true)).slice(0, 6);
+  let services: Awaited<ReturnType<typeof listServices>> = [];
+  let servicesError = false;
+  try {
+    services = (await listServices(true)).slice(0, 6);
+  } catch {
+    servicesError = true;
+  }
 
   return (
     <>
@@ -56,6 +62,13 @@ export default async function HomePage() {
             Pick a service, choose a slot, and we confirm. Full list and booking
             in one tap.
           </p>
+
+          {servicesError && (
+            <p className="mt-6 rounded-xl bg-warn/10 px-4 py-3 text-sm text-warn">
+              Services are temporarily unavailable (database offline). Try Book
+              Now again in a minute, or WhatsApp us.
+            </p>
+          )}
 
           <ul className="mt-10 divide-y divide-line border-y border-line">
             {services.map((s) => (

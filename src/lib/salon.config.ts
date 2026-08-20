@@ -11,7 +11,7 @@ export const salon = {
   aboutLead: "Care that fits your day",
   aboutParagraphs: [
     "Welcome to Ranu Salon. We keep things simple: quality cuts, clear timing, and a booking flow you can finish on your phone in a minute.",
-    "Whether you need a quick tidy-up or a fuller style refresh, reserve a slot online and we will confirm from our side. Open every day from afternoon into the night — so late appointments are easier.",
+    "Whether you need a quick tidy-up or a fuller style refresh, reserve a slot online and we will confirm from our side. Open every day from 11:00 AM to 11:00 PM.",
     "Update this text anytime with the owner’s own words. Swap stock photos for real shop and cut photos when ready.",
   ] as const,
   ownerName: "Ranu", // replace with full owner name when confirmed
@@ -20,16 +20,19 @@ export const salon = {
   /** WhatsApp link uses country code without + */
   whatsapp: "94767771719",
   email: "",
-  /** Replace with full street address when ready */
-  address: "Sri Lanka",
-  addressNote: "Full street address and Google Maps pin will be added when the owner confirms the location.",
-  mapUrl: "", // paste Google Maps share link later
-  hoursLabel: "Every day · 1:00 PM – 12:00 AM",
-  hoursDetail: "Open every day from 1:00 PM until midnight.",
-  /** Open every day: 1:00 PM → midnight */
-  openHour: 13,
+  /** Street address — replace with full line when owner confirms */
+  address: "Sri Lanka (map pin set)",
+  addressNote: "Tap Open map for the exact salon location.",
+  mapUrl: "https://maps.app.goo.gl/3GZUynmhE7sseKNXA",
+  /** Approx coordinates from Google Maps share (for reference) */
+  mapLat: 6.820859,
+  mapLng: 80.017449,
+  hoursLabel: "Every day · 11:00 AM – 11:00 PM",
+  hoursDetail: "Open every day from 11:00 AM to 11:00 PM.",
+  /** Open every day: 11:00 AM → 11:00 PM */
+  openHour: 11,
   openMinute: 0,
-  closeHour: 24, // midnight (end of day)
+  closeHour: 23,
   timezone: "Asia/Colombo",
   /** Live site — used for QR poster */
   siteUrl: "https://salon-booking-seven-rho.vercel.app",

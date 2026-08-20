@@ -48,7 +48,7 @@ export function getAvailableSlots(options: {
   if (isClosed(dateKey, closedDays)) return [];
 
   const dayStart = colomboDateTime(dateKey, salon.openHour, salon.openMinute);
-  const hardEnd = colomboDateTime(dateKey, 24, 0);
+  const hardEnd = colomboDateTime(dateKey, salon.closeHour, 0);
 
   const activeBookings = bookings.filter(
     (b) => b.status === "pending" || b.status === "confirmed",
