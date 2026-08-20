@@ -29,7 +29,6 @@ export function Header() {
           {salon.name}
         </Link>
 
-        {/* Desktop links */}
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
           {links.map((l) => (
             <Link
@@ -45,16 +44,26 @@ export function Header() {
           </Link>
         </nav>
 
-        {/* Phone / small screen: opens the page list */}
+        {/* Phone only: ☰ opens page list — same idea as most apps */}
         <button
           type="button"
-          className="btn btn-ghost relative z-50 min-w-[5.5rem] px-4 md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink md:hidden"
+          aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "Close" : "Menu"}
+          {open ? (
+            <span className="text-2xl leading-none" aria-hidden>
+              ×
+            </span>
+          ) : (
+            <span className="flex flex-col gap-1.5" aria-hidden>
+              <span className="block h-0.5 w-5 bg-ink" />
+              <span className="block h-0.5 w-5 bg-ink" />
+              <span className="block h-0.5 w-5 bg-ink" />
+            </span>
+          )}
         </button>
       </div>
 
@@ -64,6 +73,9 @@ export function Header() {
           className="border-t border-line bg-surface px-4 py-3 shadow-sm md:hidden"
           aria-label="Mobile"
         >
+          <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-mute">
+            Pages
+          </p>
           <div className="flex flex-col gap-1">
             {links.map((l) => (
               <Link
