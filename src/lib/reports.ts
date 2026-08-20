@@ -75,6 +75,12 @@ export function bookingInRange(b: Booking, from: Date, to: Date) {
   return t >= from.getTime() && t <= to.getTime();
 }
 
+export type ChartPoint = {
+  key: string;
+  label: string;
+  earningsLkr: number;
+};
+
 export type ReportSummary = {
   range: ReportRange;
   label: string;
@@ -83,6 +89,7 @@ export type ReportSummary = {
   earningsLkr: number;
   counts: Record<BookingStatus | "total", number>;
   topServices: { serviceId: string; name: string; count: number; earningsLkr: number }[];
+  chart: ChartPoint[];
   rows: {
     id: string;
     when: string;
@@ -93,6 +100,78 @@ export type ReportSummary = {
     status: BookingStatus;
   }[];
 };
+
+function colomboHour(iso: string): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: salon.timezone,
+    hour: "numeric",
+    hourCycle: "h23",
+  }).formatToParts(new Date(iso));
+  return Number(parts.find((p) => p.type === "hour")?.value ?? "0");
+}
+
+function buildChart(
+  completed: Booking[],
+  svcMap: Map<string, Service>,
+  range: ReportRange,
+  fromKey: string,
+  toKey: string,
+): ChartPoint[] {
+  const earn = (b: Booking) => svcMap.get(b.serviceId)?.priceLkr ?? 0;
+
+  if (range === "day") {
+    const byHour = new Map<number, number>();
+    for (let h = salon.openHour; h < salon.closeHour; h++) byHour.set(h, 0);
+    for (const b of completed) {
+      const h = colomboHour(b.startsAt);
+      if (!byHour.has(h)) continue;
+      byHour.set(h, (byHour.get(h) || 0) + earn(b));
+    }
+    return [...byHour.entries()].map(([h, earningsLkr]) => ({
+      key: String(h),
+      label: `${h}`,
+      earningsLkr,
+    }));
+  }
+
+  if (range === "week") {
+    const days: ChartPoint[] = [];
+    const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    for (let i = 0; i < 7; i++) {
+      const key = addDaysKey(fromKey, i);
+      days.push({ key, label: labels[i], earningsLkr: 0 });
+    }
+    const index = new Map(days.map((d, i) => [d.key, i]));
+    for (const b of completed) {
+      const key = toDateKey(new Date(b.startsAt));
+      const i = index.get(key);
+      if (i === undefined) continue;
+      days[i].earningsLkr += earn(b);
+    }
+    return days;
+  }
+
+  // month — one bar per calendar day
+  const days: ChartPoint[] = [];
+  let cursor = fromKey;
+  while (cursor <= toKey) {
+    days.push({
+      key: cursor,
+      label: String(Number(cursor.slice(8))),
+      earningsLkr: 0,
+    });
+    cursor = addDaysKey(cursor, 1);
+  }
+  const index = new Map(days.map((d, i) => [d.key, i]));
+  for (const b of completed) {
+    const key = toDateKey(new Date(b.startsAt));
+    const i = index.get(key);
+    if (i === undefined) continue;
+    days[i].earningsLkr += earn(b);
+  }
+  return days;
+}
+
 
 export function buildReport(
   bookings: Booking[],
@@ -160,6 +239,7 @@ export function buildReport(
     earningsLkr,
     counts,
     topServices,
+    chart: buildChart(completed, svcMap, range, fromKey, toKey),
     rows,
   };
 }

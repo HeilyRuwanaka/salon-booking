@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
+import { EarningsBarChart } from "@/components/EarningsBarChart";
 import { salon } from "@/lib/salon.config";
 import { formatBookingWhen } from "@/lib/slots";
 import type { ReportRange, ReportSummary } from "@/lib/reports";
@@ -156,6 +157,8 @@ export function AdminReports() {
               {report.counts.total}
             </p>
           </div>
+
+          <EarningsBarChart points={report.chart} range={report.range} />
 
           {report.topServices.length > 0 && (
             <div className="rounded-2xl border border-line bg-white p-4">
