@@ -33,10 +33,10 @@ export default async function HomePage() {
             <Image
               src="/images/logo.png"
               alt={salon.name}
-              width={220}
-              height={300}
+              width={360}
+              height={288}
               priority
-              className="h-auto w-36 object-contain sm:w-44 md:w-52"
+              className="h-auto w-48 object-contain sm:w-56 md:w-64"
             />
           </div>
           <p className="animate-rise-delay mt-5 max-w-xl text-lg text-sand/90 sm:text-xl">

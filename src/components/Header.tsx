@@ -28,7 +28,7 @@ export function Header() {
       style={{ backgroundColor: "#010101" }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5">
-        <BrandLogo height={76} priority />
+        <BrandLogo height={88} priority />
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
           {links.map((l) => {

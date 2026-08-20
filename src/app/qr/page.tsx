@@ -25,9 +25,9 @@ export default function QrPosterPage() {
       <Image
         src="/images/logo.png"
         alt={salon.name}
-        width={160}
-        height={220}
-        className="mt-4 h-auto w-28 object-contain sm:w-32"
+        width={280}
+        height={224}
+        className="mt-4 h-auto w-40 object-contain sm:w-48"
         priority
       />
       <p className="mt-4 text-mute">Scan to book your appointment</p>

@@ -76,7 +76,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       >
         <div className="flex items-center justify-between gap-3 px-4 py-4">
           <div className="flex min-w-0 items-center gap-3">
-            <BrandLogo href="/admin" height={68} priority />
+            <BrandLogo href="/admin" height={80} priority />
             <div className="min-w-0">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-copper">
                 Admin

@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="mx-auto flex min-h-[100dvh] max-w-md flex-col justify-center px-4 py-10">
-      <BrandLogo href="/" height={88} priority className="rounded-sm" />
+      <BrandLogo href="/" height={120} priority className="rounded-sm" />
       <h1 className="mt-6 text-xl font-semibold">Owner login</h1>
       <p className="mt-2 text-sm text-mute">
         For the phone admin. Use the password from Settings (or the bootstrap
