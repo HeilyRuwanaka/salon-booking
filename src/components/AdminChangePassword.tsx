@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PasswordField } from "@/components/PasswordField";
 
 export function AdminChangePassword() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -47,22 +48,18 @@ export function AdminChangePassword() {
 
       <label className="block text-sm">
         Current password
-        <input
-          type="password"
-          className="field mt-1"
+        <PasswordField
           value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
+          onChange={setCurrentPassword}
           autoComplete="current-password"
           required
         />
       </label>
       <label className="block text-sm">
         New password
-        <input
-          type="password"
-          className="field mt-1"
+        <PasswordField
           value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          onChange={setNewPassword}
           autoComplete="new-password"
           minLength={6}
           required
@@ -70,11 +67,9 @@ export function AdminChangePassword() {
       </label>
       <label className="block text-sm">
         Confirm new password
-        <input
-          type="password"
-          className="field mt-1"
+        <PasswordField
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={setConfirmPassword}
           autoComplete="new-password"
           minLength={6}
           required

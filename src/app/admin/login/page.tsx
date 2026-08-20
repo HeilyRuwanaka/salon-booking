@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PasswordField } from "@/components/PasswordField";
 import { salon } from "@/lib/salon.config";
 
 export default function AdminLoginPage() {
@@ -42,11 +43,10 @@ export default function AdminLoginPage() {
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <label className="block">
           <span className="mb-1 block text-sm text-mute">Password</span>
-          <input
-            className="field text-lg"
-            type="password"
+          <PasswordField
+            className="field mt-0 text-lg"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={setPassword}
             autoComplete="current-password"
             inputMode="text"
           />
