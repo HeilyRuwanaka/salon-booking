@@ -143,6 +143,7 @@ export function AdminBookings({ initialBookings, services }: Props) {
         }
         knownPending.current = new Set(pendingIds);
         setBookings(data);
+        window.dispatchEvent(new Event("admin-bookings-changed"));
       } catch {
         /* ignore */
       }
@@ -166,6 +167,7 @@ export function AdminBookings({ initialBookings, services }: Props) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Update failed");
       setBookings((prev) => prev.map((b) => (b.id === id ? data : b)));
+      window.dispatchEvent(new Event("admin-bookings-changed"));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Update failed");
     } finally {
