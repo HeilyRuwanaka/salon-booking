@@ -70,17 +70,26 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto min-h-[100dvh] max-w-lg bg-stone">
-      <header className="sticky top-0 z-30 overflow-visible border-b border-line bg-stone/95 px-4 py-3 backdrop-blur">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-2.5">
-            <BrandLogo href="/admin" height={36} />
-            <p className="truncate text-sm font-semibold tracking-wide text-mute">Admin</p>
+      <header className="sticky top-0 z-30 overflow-visible border-t-2 border-copper bg-ink">
+        <div className="flex items-center justify-between gap-3 px-4 py-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <BrandLogo href="/admin" height={52} priority />
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-copper">
+                Admin
+              </p>
+              <p className="truncate text-xs text-stone/55">Owner panel</p>
+            </div>
           </div>
-          <button type="button" onClick={logout} className="shrink-0 text-sm text-mute underline">
+          <button
+            type="button"
+            onClick={logout}
+            className="shrink-0 rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-stone/80 hover:border-copper hover:text-copper"
+          >
             Log out
           </button>
         </div>
-        <nav className="mt-3 grid grid-cols-5 gap-1.5 overflow-visible pt-1">
+        <nav className="grid grid-cols-5 gap-1 overflow-visible border-t border-white/10 bg-ink px-2 pb-2.5 pt-2">
           {tabs.map((t) => {
             const active =
               t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
@@ -89,8 +98,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={t.href}
                 href={t.href}
-                className={`relative overflow-visible rounded-xl py-2.5 text-center text-[11px] font-semibold leading-tight sm:text-sm ${
-                  active ? "bg-ink text-stone" : "bg-sand text-ink"
+                className={`relative overflow-visible rounded-lg py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide sm:text-[11px] ${
+                  active
+                    ? "bg-copper text-ink"
+                    : "bg-white/5 text-stone/80 hover:bg-white/10 hover:text-copper"
                 }`}
               >
                 {t.label}

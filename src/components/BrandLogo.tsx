@@ -11,7 +11,7 @@ type Props = {
   priority?: boolean;
 };
 
-/** Official Ranu Salon mark (gold on black). Keep compact so it doesn’t overpower the UI. */
+/** Official Ranu Salon mark (gold on black). */
 export function BrandLogo({
   height = 40,
   href = "/",
@@ -27,12 +27,17 @@ export function BrandLogo({
       className={`w-auto object-contain ${className}`.trim()}
       style={{ height, width: "auto" }}
       priority={priority}
+      sizes={`${height}px`}
     />
   );
 
-  if (href === null) return img;
+  if (href === null) return <span className="inline-flex shrink-0 items-center">{img}</span>;
   return (
-    <Link href={href} className="inline-flex shrink-0 items-center" aria-label="Ranu Salon home">
+    <Link
+      href={href}
+      className="inline-flex shrink-0 items-center outline-offset-4 focus-visible:outline focus-visible:outline-copper"
+      aria-label="Ranu Salon home"
+    >
       {img}
     </Link>
   );

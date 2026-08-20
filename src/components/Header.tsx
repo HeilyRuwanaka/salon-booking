@@ -23,28 +23,36 @@ export function Header() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
-        <BrandLogo height={44} priority />
+    <header className="sticky top-0 z-40 border-t-2 border-copper bg-ink">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <BrandLogo height={60} priority />
 
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`text-sm ${pathname === l.href ? "font-semibold text-copper-deep" : "text-mute hover:text-ink"}`}
-            >
-              {l.label}
-            </Link>
-          ))}
-          <Link href="/book" className="btn btn-accent text-sm">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
+          {links.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`text-[13px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                  active ? "text-copper" : "text-stone/85 hover:text-copper"
+                }`}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
+          <Link
+            href="/book"
+            className="rounded-full border border-copper bg-copper px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-copper-deep hover:text-stone hover:border-copper-deep"
+          >
             Book Now
           </Link>
         </nav>
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/25 text-stone md:hidden"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -56,9 +64,9 @@ export function Header() {
             </span>
           ) : (
             <span className="flex flex-col gap-1.5" aria-hidden>
-              <span className="block h-0.5 w-5 bg-ink" />
-              <span className="block h-0.5 w-5 bg-ink" />
-              <span className="block h-0.5 w-5 bg-ink" />
+              <span className="block h-0.5 w-5 bg-stone" />
+              <span className="block h-0.5 w-5 bg-stone" />
+              <span className="block h-0.5 w-5 bg-stone" />
             </span>
           )}
         </button>
@@ -67,31 +75,29 @@ export function Header() {
       {open && (
         <nav
           id="mobile-nav"
-          className="border-t border-line bg-surface px-4 py-3 shadow-sm md:hidden"
+          className="border-t border-white/10 bg-ink px-4 py-3 md:hidden"
           aria-label="Mobile"
         >
-          <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-mute">
-            Pages
-          </p>
           <div className="flex flex-col gap-1">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className={`rounded-xl px-3 py-3.5 text-base ${
-                  pathname === l.href
-                    ? "bg-stone font-semibold text-copper-deep"
-                    : "text-ink hover:bg-stone"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-lg px-3 py-3.5 text-sm font-medium uppercase tracking-[0.12em] ${
+                    active ? "bg-white/10 text-copper" : "text-stone/90 hover:bg-white/5"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
             <Link
               href="/book"
               onClick={() => setOpen(false)}
-              className="btn btn-accent mt-2 w-full"
+              className="mt-2 rounded-full bg-copper px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-ink"
             >
               Book Now
             </Link>
