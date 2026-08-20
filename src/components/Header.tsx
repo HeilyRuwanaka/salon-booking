@@ -27,9 +27,9 @@ export function Header() {
       className="sticky top-0 z-40 border-t border-copper"
       style={{ backgroundColor: "#010101" }}
     >
-      {/* ~80px bar + ~50px logo = comfortable padding (pro proportion) */}
+      {/* Logo height = bar height so the mark fills the bar (same #010101 bg) */}
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <BrandLogo height={50} priority />
+        <BrandLogo height={80} priority />
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
           {links.map((l) => {
