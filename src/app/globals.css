@@ -102,6 +102,20 @@ body {
   background: var(--surface);
 }
 
+/* Secondary actions on dark hero / dark bands */
+.btn-on-dark {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  color: #f4f6f4;
+}
+
+.btn-on-dark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
+}
+
+
 .field {
   width: 100%;
   min-height: 2.85rem;

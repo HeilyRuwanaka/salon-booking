@@ -41,14 +41,11 @@ export default async function HomePage() {
             </Link>
             <a
               href={whatsappUrl("Hi, I want to book at Ranu Salon")}
-              className="btn btn-ghost border-white/30 text-stone hover:bg-white/10"
+              className="btn btn-on-dark text-base"
             >
               WhatsApp
             </a>
-            <a
-              href={telUrl()}
-              className="btn btn-ghost border-white/30 text-stone hover:bg-white/10"
-            >
+            <a href={telUrl()} className="btn btn-on-dark text-base">
               Call
             </a>
           </div>
