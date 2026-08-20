@@ -23,23 +23,29 @@ export default async function HomePage() {
           alt=""
           fill
           priority
-          className="object-cover"
+          className="object-cover object-[center_30%] scale-105"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/40" />
+        {/* Deep vignette so brand sits in shadow — no hard logo box */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-[#010101]/80 to-[#010101]/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#010101]/70 via-transparent to-transparent" />
 
         <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20">
-          <div className="animate-rise">
+          <div className="hero-logo-mark max-w-md">
             <Image
-              src="/images/logo.png"
+              src="/images/logo-mark.png"
               alt={salon.name}
-              width={360}
-              height={288}
+              width={420}
+              height={336}
               priority
-              className="h-auto w-48 object-contain sm:w-56 md:w-64"
+              className="h-auto w-[13.5rem] object-contain object-left sm:w-[16.5rem] md:w-[18.5rem]"
+            />
+            <div
+              className="mt-5 h-px w-24 bg-gradient-to-r from-copper via-copper/70 to-transparent sm:w-32"
+              aria-hidden
             />
           </div>
-          <p className="animate-rise-delay mt-5 max-w-xl text-lg text-sand/90 sm:text-xl">
+          <p className="animate-rise-delay mt-6 max-w-lg text-lg leading-relaxed text-sand/90 sm:text-xl">
             {salon.tagline}
           </p>
           <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
@@ -56,7 +62,7 @@ export default async function HomePage() {
               Call
             </a>
           </div>
-          <p className="mt-8 text-sm text-sand/70">{salon.hoursLabel}</p>
+          <p className="mt-8 text-sm tracking-wide text-sand/60">{salon.hoursLabel}</p>
         </div>
       </section>
 

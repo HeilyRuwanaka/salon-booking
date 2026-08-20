@@ -41,6 +41,8 @@ export const salon = {
   heroImage: "/images/hero.jpg",
   aboutImage: "/images/about.jpg",
   logoImage: "/images/logo.png",
+  /** Transparent gold mark for photo backgrounds (hero) */
+  logoMarkImage: "/images/logo-mark.png",
   /**
    * Placeholder reviews — replace with real customer quotes.
    * Keep 2–3 short lines for the homepage.
