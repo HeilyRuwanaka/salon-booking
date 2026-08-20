@@ -81,6 +81,13 @@ export function telUrl() {
   return `tel:${salon.phone}`;
 }
 
+/** Embeddable Google Map for Contact page (full-width section) */
+export function mapEmbedUrl() {
+  const q = encodeURIComponent(`${salon.mapLat},${salon.mapLng}`);
+  return `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
+}
+
+
 /** Free QR image for the book link (printable poster /qr page) */
 export function bookQrImageUrl(size = 320) {
   const data = encodeURIComponent(bookUrl());

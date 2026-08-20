@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { salon, telUrl, whatsappUrl } from "@/lib/salon.config";
+import { mapEmbedUrl, salon, telUrl, whatsappUrl } from "@/lib/salon.config";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -8,69 +8,110 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
-        Contact
-      </p>
-      <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
-        Reach {salon.name}
-      </h1>
-      <p className="mt-4 max-w-xl text-mute">
-        Prefer chatting? Use WhatsApp. Ready to lock a time? Book online in a
-        minute.
-      </p>
+    <>
+      {/* Intro + get in touch (no message form) */}
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
+          Contact
+        </p>
+        <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
+          Get in touch
+        </h1>
+        <p className="mt-4 max-w-xl text-mute">
+          Call, WhatsApp, or book online. Find us on the map below — no forms,
+          just the details you need.
+        </p>
 
-      <dl className="mt-10 grid gap-8 border-y border-line py-10 sm:grid-cols-2">
-        <div>
-          <dt className="text-sm uppercase tracking-wide text-mute">Phone</dt>
-          <dd className="mt-2 text-xl font-semibold">
-            <a href={telUrl()} className="hover:text-copper-deep">
-              {salon.phoneDisplay}
-            </a>
-          </dd>
-        </div>
-        <div>
-          <dt className="text-sm uppercase tracking-wide text-mute">WhatsApp</dt>
-          <dd className="mt-2 text-xl font-semibold">
-            <a href={whatsappUrl()} className="hover:text-copper-deep">
-              Chat with us
-            </a>
-          </dd>
-        </div>
-        <div>
-          <dt className="text-sm uppercase tracking-wide text-mute">Hours</dt>
-          <dd className="mt-2 text-xl font-semibold">{salon.hoursLabel}</dd>
-          <dd className="mt-1 text-sm text-mute">{salon.hoursDetail}</dd>
-        </div>
-        <div>
-          <dt className="text-sm uppercase tracking-wide text-mute">Location</dt>
-          <dd className="mt-2 text-xl font-semibold">{salon.address}</dd>
-          <dd className="mt-2 text-sm text-mute">
-            {salon.mapUrl ? "Map ready below." : salon.addressNote}
-          </dd>
-          {salon.mapUrl && (
-            <dd className="mt-4">
+        <div className="mt-10 grid gap-10 border-y border-line py-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-mute">
+              Location
+            </p>
+            <p className="mt-3 text-lg font-semibold text-ink">{salon.address}</p>
+            <p className="mt-2 text-sm text-mute">{salon.addressNote}</p>
+            {salon.mapUrl && (
               <a
                 href={salon.mapUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-primary"
+                className="mt-3 inline-block text-sm font-semibold text-copper-deep underline-offset-4 hover:underline"
               >
-                Open map
+                Open in Google Maps
               </a>
-            </dd>
+            )}
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-mute">
+              Hours
+            </p>
+            <p className="mt-3 text-lg font-semibold text-ink">{salon.hoursLabel}</p>
+            <p className="mt-2 text-sm text-mute">{salon.hoursDetail}</p>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-mute">
+              Phone
+            </p>
+            <a
+              href={telUrl()}
+              className="mt-3 block text-lg font-semibold text-ink hover:text-copper-deep"
+            >
+              {salon.phoneDisplay}
+            </a>
+            <a
+              href={whatsappUrl("Hi, I want to book at Ranu Salon")}
+              className="mt-2 inline-block text-sm font-semibold text-copper-deep underline-offset-4 hover:underline"
+            >
+              WhatsApp chat
+            </a>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-mute">
+              Book
+            </p>
+            <p className="mt-3 text-sm text-mute">
+              Reserve a time online — fast on your phone.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link href="/book" className="btn btn-accent text-sm">
+                Book Now
+              </Link>
+              <Link href="/services" className="btn btn-ghost text-sm">
+                Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full-bleed map — like the sample, without a contact form */}
+      <section className="w-full border-t border-line" aria-label="Salon location map">
+        <div className="relative h-[min(70vh,520px)] w-full bg-sand">
+          <iframe
+            title={`${salon.name} on Google Maps`}
+            src={mapEmbedUrl()}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
+          <p className="text-sm text-mute">Pin shows the salon location.</p>
+          {salon.mapUrl && (
+            <a
+              href={salon.mapUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary text-sm"
+            >
+              Open map app
+            </a>
           )}
         </div>
-      </dl>
-
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/book" className="btn btn-accent">
-          Book Now
-        </Link>
-        <Link href="/qr" className="btn btn-ghost">
-          Shop QR code
-        </Link>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
