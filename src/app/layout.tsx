@@ -17,8 +17,12 @@ export const metadata: Metadata = {
   },
   description: salon.description,
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-48.png", sizes: "48x48", type: "image/png" },
+    ],
+    apple: [{ url: "/images/favicon-180.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
