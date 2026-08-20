@@ -24,12 +24,12 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-40 border-t-2 border-copper"
+      className="sticky top-0 z-40 border-t border-copper"
       style={{ backgroundColor: "#010101" }}
     >
-      {/* Bar height locked to sample (70px). Logo stays current size (88). */}
-      <div className="mx-auto flex h-[70px] max-h-[70px] min-h-[70px] max-w-6xl items-center justify-between gap-4 overflow-visible px-4 sm:px-6">
-        <BrandLogo height={88} priority />
+      {/* ~80px bar + ~50px logo = comfortable padding (pro proportion) */}
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <BrandLogo height={50} priority />
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
           {links.map((l) => {
@@ -38,8 +38,8 @@ export function Header() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-[13px] font-medium uppercase tracking-[0.14em] transition-colors ${
-                  active ? "text-copper" : "text-stone/85 hover:text-copper"
+                className={`text-[12px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                  active ? "text-copper" : "text-stone/80 hover:text-copper"
                 }`}
               >
                 {l.label}
@@ -48,7 +48,7 @@ export function Header() {
           })}
           <Link
             href="/book"
-            className="rounded-full border border-copper bg-copper px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-copper-deep hover:text-stone hover:border-copper-deep"
+            className="rounded-full border border-copper bg-copper px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-copper-deep hover:text-stone hover:border-copper-deep"
           >
             Book Now
           </Link>
