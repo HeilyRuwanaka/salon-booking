@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
         <label className="block">
           <span className="mb-1 block text-sm text-mute">Password</span>
           <PasswordField
-            className="field mt-0 text-lg"
+            className="text-lg"
             value={password}
             onChange={setPassword}
             autoComplete="current-password"
