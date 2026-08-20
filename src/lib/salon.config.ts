@@ -37,11 +37,9 @@ export const salon = {
   /** Live site — used for QR poster */
   siteUrl: "https://salon-booking-seven-rho.vercel.app",
   bookPath: "/book",
-  /** Stock images — swap for real cut / shop photos later */
-  heroImage:
-    "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1600&q=80",
-  aboutImage:
-    "https://images.unsplash.com/photo-1599351431202-1e0f034d39a1?auto=format&fit=crop&w=1200&q=80",
+  /** Local photos in /public/images — swap for real shop photos later */
+  heroImage: "/images/hero.jpg",
+  aboutImage: "/images/about.jpg",
   /**
    * Placeholder reviews — replace with real customer quotes.
    * Keep 2–3 short lines for the homepage.
