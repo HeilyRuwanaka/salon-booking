@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Service } from "@/lib/types";
-import { formatSlotLabel } from "@/lib/slots";
+import { formatSlotLabel, formatSlotRange, type DaySlot } from "@/lib/slots";
+import { salon } from "@/lib/salon.config";
 
 type Props = {
   services: Service[];
@@ -39,7 +40,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
   const [step, setStep] = useState(1);
   const [serviceId, setServiceId] = useState(initialServiceId || "");
   const [dateKey, setDateKey] = useState(days[0]?.key || "");
-  const [slots, setSlots] = useState<string[]>([]);
+  const [daySlots, setDaySlots] = useState<DaySlot[]>([]);
   const [closed, setClosed] = useState(false);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [startsAt, setStartsAt] = useState("");
@@ -49,6 +50,8 @@ export function BookingWizard({ services, initialServiceId }: Props) {
   const [submitting, setSubmitting] = useState(false);
 
   const service = services.find((s) => s.id === serviceId);
+  const selected = daySlots.find((s) => s.startsAt === startsAt);
+  const availableCount = daySlots.filter((s) => s.status === "available").length;
 
   useEffect(() => {
     if (!serviceId || !dateKey) return;
@@ -59,7 +62,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
       .then((r) => r.json())
       .then((data) => {
         if (cancelled) return;
-        setSlots(data.slots || []);
+        setDaySlots(data.daySlots || []);
         setClosed(Boolean(data.closed));
       })
       .catch(() => {
@@ -124,6 +127,9 @@ export function BookingWizard({ services, initialServiceId }: Props) {
       {step === 1 && (
         <div className="space-y-3">
           <h2 className="font-display text-2xl">Select a service</h2>
+          <p className="text-sm text-mute">
+            Longer services need a longer free block (e.g. 45 min needs 45 free minutes).
+          </p>
           {services.map((s) => (
             <button
               key={s.id}
@@ -132,13 +138,13 @@ export function BookingWizard({ services, initialServiceId }: Props) {
               className={`w-full rounded-2xl border p-4 text-left transition ${
                 serviceId === s.id
                   ? "border-copper bg-white shadow-sm"
-                  : "border-line bg-white/60 hover:border-copper/50"
+                  : "border-line bg-white hover:border-copper/50"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="font-semibold">{s.name}</p>
-                  <p className="text-sm text-mute">{s.durationMinutes} min</p>
+                  <p className="text-sm text-mute">{s.durationMinutes} min session</p>
                 </div>
                 <p className="font-semibold">LKR {s.priceLkr.toLocaleString("en-LK")}</p>
               </div>
@@ -159,8 +165,9 @@ export function BookingWizard({ services, initialServiceId }: Props) {
         <div className="space-y-4">
           <h2 className="font-display text-2xl">Pick date &amp; time</h2>
           <p className="text-sm text-mute">
-            {service?.name} · {service?.durationMinutes} min
+            {service?.name} · {service?.durationMinutes} min · Open {salon.hoursLabel}
           </p>
+
           <div className="flex gap-2 overflow-x-auto pb-1">
             {days.map((d) => (
               <button
@@ -178,33 +185,72 @@ export function BookingWizard({ services, initialServiceId }: Props) {
             ))}
           </div>
 
-          {loadingSlots && <p className="text-mute">Loading free times…</p>}
+          {loadingSlots && <p className="text-mute">Loading times…</p>}
           {!loadingSlots && closed && (
             <p className="rounded-2xl bg-sand px-4 py-3 text-sm">
               Salon is closed this day. Please choose another date.
             </p>
           )}
-          {!loadingSlots && !closed && slots.length === 0 && (
+          {!loadingSlots && !closed && availableCount === 0 && (
             <p className="rounded-2xl bg-sand px-4 py-3 text-sm">
-              No free slots this day. Try another date.
+              No free {service?.durationMinutes}-minute starts this day. Try another date
+              (or a shorter service).
             </p>
           )}
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-            {slots.map((iso) => (
-              <button
-                key={iso}
-                type="button"
-                onClick={() => setStartsAt(iso)}
-                className={`rounded-xl border px-2 py-3 text-sm ${
-                  startsAt === iso
-                    ? "border-copper bg-copper text-white"
-                    : "border-line bg-white"
-                }`}
-              >
-                {formatSlotLabel(iso)}
-              </button>
-            ))}
-          </div>
+
+          {!loadingSlots && !closed && daySlots.length > 0 && (
+            <>
+              <div className="flex flex-wrap gap-3 text-xs text-mute">
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-3 w-3 rounded border border-line bg-white" /> Available
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-3 w-3 rounded bg-sand opacity-60" /> Busy / too short
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-3 w-3 rounded bg-stone opacity-40" /> Past
+                </span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                {daySlots.map((slot) => {
+                  const free = slot.status === "available";
+                  const selectedSlot = startsAt === slot.startsAt;
+                  return (
+                    <button
+                      key={slot.startsAt}
+                      type="button"
+                      disabled={!free}
+                      title={
+                        free
+                          ? formatSlotRange(slot.startsAt, slot.endsAt)
+                          : slot.status === "past"
+                            ? "Already passed"
+                            : "Booked or not enough free time for this service"
+                      }
+                      onClick={() => free && setStartsAt(slot.startsAt)}
+                      className={`rounded-xl border px-2 py-3 text-sm transition ${
+                        selectedSlot
+                          ? "border-copper bg-copper text-white"
+                          : free
+                            ? "border-line bg-white hover:border-copper"
+                            : "cursor-not-allowed border-transparent bg-sand/70 text-mute/50 line-through"
+                      }`}
+                    >
+                      {formatSlotLabel(slot.startsAt)}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {selected && (
+            <p className="rounded-xl bg-stone px-4 py-3 text-sm font-medium text-ink">
+              Your session: {formatSlotRange(selected.startsAt, selected.endsAt)} (
+              {service?.durationMinutes} min)
+            </p>
+          )}
 
           <div className="flex gap-2">
             <button type="button" className="btn btn-ghost flex-1" onClick={() => setStep(1)}>
@@ -226,8 +272,11 @@ export function BookingWizard({ services, initialServiceId }: Props) {
         <div className="space-y-4">
           <h2 className="font-display text-2xl">Your details</h2>
           <p className="text-sm text-mute">
-            {service?.name} · {formatSlotLabel(startsAt)} on{" "}
-            {days.find((d) => d.key === dateKey)?.label}
+            {service?.name} ·{" "}
+            {selected
+              ? formatSlotRange(selected.startsAt, selected.endsAt)
+              : formatSlotLabel(startsAt)}{" "}
+            · {days.find((d) => d.key === dateKey)?.label}
           </p>
           <label className="block">
             <span className="mb-1 block text-sm text-mute">Name</span>

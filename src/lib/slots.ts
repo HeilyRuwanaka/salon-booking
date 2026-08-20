@@ -32,31 +32,44 @@ export function isClosed(dateKey: string, closedDays: ClosedDay[]) {
   return closedDays.some((d) => d.date === dateKey);
 }
 
+export type SlotStatus = "available" | "past" | "busy";
+
+export type DaySlot = {
+  startsAt: string;
+  endsAt: string;
+  status: SlotStatus;
+};
+
 /**
- * Generate free start times for a service on a given day.
- * Open window: salon.openHour → midnight.
+ * Full day timeline for one service.
+ * - Starts every 15 min from open → last start that still ends by close
+ * - Duration comes from the selected service (30 min → 11:00–11:30, 45 → 11:00–11:45)
+ * - Overlaps with pending/confirmed bookings → busy (faded)
+ * - Too little gap before next booking → busy (not offered as free)
+ * - Already passed today → past (faded)
  */
-export function getAvailableSlots(options: {
+export function getDaySlots(options: {
   dateKey: string;
   service: Service;
   bookings: Booking[];
   closedDays: ClosedDay[];
   now?: Date;
-}): string[] {
+}): DaySlot[] {
   const { dateKey, service, bookings, closedDays, now = new Date() } = options;
 
   if (isClosed(dateKey, closedDays)) return [];
 
   const dayStart = colomboDateTime(dateKey, salon.openHour, salon.openMinute);
   const hardEnd = colomboDateTime(dateKey, salon.closeHour, 0);
+  const stepMs = 15 * 60 * 1000;
+  const durationMs = service.durationMinutes * 60 * 1000;
+  const leadMs = 15 * 60 * 1000;
 
   const activeBookings = bookings.filter(
     (b) => b.status === "pending" || b.status === "confirmed",
   );
 
-  const slots: string[] = [];
-  const stepMs = 15 * 60 * 1000;
-  const durationMs = service.durationMinutes * 60 * 1000;
+  const slots: DaySlot[] = [];
 
   for (
     let t = dayStart.getTime();
@@ -65,17 +78,39 @@ export function getAvailableSlots(options: {
   ) {
     const start = t;
     const end = t + durationMs;
-    if (start < now.getTime() + 15 * 60 * 1000) continue;
+    const startsAt = new Date(start).toISOString();
+    const endsAt = new Date(end).toISOString();
+
+    if (start < now.getTime() + leadMs) {
+      slots.push({ startsAt, endsAt, status: "past" });
+      continue;
+    }
 
     const conflict = activeBookings.some((b) =>
       overlaps(start, end, new Date(b.startsAt).getTime(), new Date(b.endsAt).getTime()),
     );
-    if (conflict) continue;
 
-    slots.push(new Date(start).toISOString());
+    slots.push({
+      startsAt,
+      endsAt,
+      status: conflict ? "busy" : "available",
+    });
   }
 
   return slots;
+}
+
+/** Free starts only (API booking checks + admin walk-in) */
+export function getAvailableSlots(options: {
+  dateKey: string;
+  service: Service;
+  bookings: Booking[];
+  closedDays: ClosedDay[];
+  now?: Date;
+}): string[] {
+  return getDaySlots(options)
+    .filter((s) => s.status === "available")
+    .map((s) => s.startsAt);
 }
 
 export function formatSlotLabel(iso: string) {
@@ -85,6 +120,10 @@ export function formatSlotLabel(iso: string) {
     minute: "2-digit",
     hour12: true,
   }).format(new Date(iso));
+}
+
+export function formatSlotRange(startsAt: string, endsAt: string) {
+  return `${formatSlotLabel(startsAt)} – ${formatSlotLabel(endsAt)}`;
 }
 
 export function formatBookingWhen(iso: string) {
