@@ -49,8 +49,14 @@ export function telUrl() {
 }
 
 export function mapEmbedUrl() {
-  const q = encodeURIComponent(`${salon.mapLat},${salon.mapLng}`);
-  return `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
+  // OpenStreetMap embed — reliable in iframes (no API key; Google’s old embed URL 404s)
+  const { mapLat: lat, mapLng: lng } = salon;
+  const d = 0.008;
+  const bbox = encodeURIComponent(
+    `${lng - d},${lat - d},${lng + d},${lat + d}`,
+  );
+  const marker = encodeURIComponent(`${lat},${lng}`);
+  return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${marker}`;
 }
 
 export function bookQrImageUrl(size = 320) {

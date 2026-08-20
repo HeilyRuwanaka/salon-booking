@@ -83,20 +83,19 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Full-bleed map — like the sample, without a contact form */}
       <section className="w-full border-t border-line bg-surface" aria-label="Salon location map">
-        <div className="relative h-[min(70vh,520px)] w-full bg-sand">
+        <div className="relative h-[min(70vh,520px)] w-full overflow-hidden bg-sand">
           <iframe
             title={`${salon.name} on Google Maps`}
             src={mapEmbedUrl()}
             className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
+            loading="eager"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
         </div>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
-          <p className="text-sm text-mute">Salon location</p>
+          <p className="text-sm text-mute">{salon.address}</p>
           {salon.mapUrl && (
             <a
               href={salon.mapUrl}
@@ -104,7 +103,7 @@ export default function ContactPage() {
               rel="noreferrer"
               className="btn btn-primary text-sm"
             >
-              Open map app
+              Open in Google Maps
             </a>
           )}
         </div>
