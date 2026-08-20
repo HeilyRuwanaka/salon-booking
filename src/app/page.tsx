@@ -29,9 +29,16 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/40" />
 
         <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20">
-          <p className="animate-rise font-display text-5xl leading-none tracking-tight text-stone sm:text-7xl md:text-8xl">
-            {salon.name}
-          </p>
+          <div className="animate-rise">
+            <Image
+              src="/images/logo.png"
+              alt={salon.name}
+              width={220}
+              height={300}
+              priority
+              className="h-auto w-36 object-contain sm:w-44 md:w-52"
+            />
+          </div>
           <p className="animate-rise-delay mt-5 max-w-xl text-lg text-sand/90 sm:text-xl">
             {salon.tagline}
           </p>

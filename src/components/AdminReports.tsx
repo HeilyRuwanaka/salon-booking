@@ -46,10 +46,10 @@ export function AdminReports() {
     doc.setFontSize(11);
     doc.text("Earnings & bookings report", margin, 26);
     doc.setFontSize(10);
-    doc.setTextColor(80);
+    doc.setTextColor(143, 120, 68);
     doc.text(`Period: ${report.label} (${report.range})`, margin, 34);
     doc.text(`Generated: ${new Date().toLocaleString("en-LK")}`, margin, 40);
-    doc.setTextColor(0);
+    doc.setTextColor(12, 12, 12);
 
     doc.setFontSize(12);
     doc.text(`Earnings (completed): LKR ${report.earningsLkr.toLocaleString("en-LK")}`, margin, 52);
@@ -73,7 +73,7 @@ export function AdminReports() {
           s.earningsLkr.toLocaleString("en-LK"),
         ]),
         styles: { fontSize: 9 },
-        headStyles: { fillColor: [18, 24, 22] },
+        headStyles: { fillColor: [12, 12, 12], textColor: [182, 158, 102] },
       });
     }
 
@@ -94,7 +94,7 @@ export function AdminReports() {
         r.status === "completed" ? r.priceLkr.toLocaleString("en-LK") : "—",
       ]),
       styles: { fontSize: 8 },
-      headStyles: { fillColor: [47, 106, 86] },
+      headStyles: { fillColor: [182, 158, 102], textColor: [12, 12, 12] },
       columnStyles: { 0: { cellWidth: 42 } },
     });
 
@@ -116,7 +116,7 @@ export function AdminReports() {
             type="button"
             onClick={() => setRange(key)}
             className={`rounded-xl py-2 text-sm font-semibold ${
-              range === key ? "bg-copper text-white" : "bg-white border border-line"
+              range === key ? "bg-copper text-ink" : "bg-white border border-line"
             }`}
           >
             {label}

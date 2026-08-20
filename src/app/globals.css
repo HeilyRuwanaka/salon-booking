@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #141a17;
-  --stone: #f4f6f4;
-  --sand: #e4ebe6;
-  --copper: #2a6350;
-  --copper-deep: #1a4638;
-  --mute: #5c6761;
-  --line: rgba(20, 26, 23, 0.1);
+  /* Brand: black + logo gold (sampled from official mark) */
+  --ink: #0c0c0c;
+  --stone: #f5f5f4;
+  --sand: #e8e4db;
+  --copper: #b69e66;
+  --copper-deep: #8f7844;
+  --mute: #6a6560;
+  --line: rgba(12, 12, 12, 0.1);
   --ok: #2f6f4e;
   --warn: #9a6b1f;
   --danger: #9b3b3b;
@@ -35,14 +36,15 @@
 }
 
 body {
-  /* Even, professional base — no warm/cool blotches */
   background: var(--stone);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman",
+    serif;
+  letter-spacing: 0.01em;
 }
 
 .section-pad {
@@ -66,7 +68,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.01em;
   transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease,
-    border-color 0.15s ease;
+    border-color 0.15s ease, color 0.15s ease;
 }
 
 .btn:active {
@@ -75,20 +77,21 @@ body {
 
 .btn-primary {
   background: var(--ink);
-  color: var(--stone);
+  color: #f5f5f4;
 }
 
 .btn-primary:hover {
-  background: var(--copper-deep);
+  background: #1a1a1a;
 }
 
 .btn-accent {
   background: var(--copper);
-  color: white;
+  color: var(--ink);
 }
 
 .btn-accent:hover {
   background: var(--copper-deep);
+  color: #f5f5f4;
 }
 
 .btn-ghost {
@@ -105,16 +108,15 @@ body {
 /* Secondary actions on dark hero / dark bands */
 .btn-on-dark {
   background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.55);
-  color: #f4f6f4;
+  border: 1.5px solid rgba(182, 158, 102, 0.65);
+  color: #f5f5f4;
 }
 
 .btn-on-dark:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(182, 158, 102, 0.14);
+  border-color: var(--copper);
   color: #ffffff;
 }
-
 
 .field {
   width: 100%;
@@ -127,7 +129,7 @@ body {
 }
 
 .field:focus {
-  outline: 2px solid rgba(42, 99, 80, 0.28);
+  outline: 2px solid rgba(182, 158, 102, 0.35);
   border-color: var(--copper);
 }
 

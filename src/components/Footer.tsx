@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BrandLogo } from "@/components/BrandLogo";
 import { salon, telUrl, whatsappUrl } from "@/lib/salon.config";
 
 export function Footer() {
@@ -12,13 +13,13 @@ export function Footer() {
     <footer className="mt-auto border-t border-line bg-ink text-stone">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl">{salon.name}</p>
-          <p className="mt-2 text-sm text-sand/80">{salon.tagline}</p>
+          <BrandLogo href="/" height={72} className="rounded-sm" />
+          <p className="mt-4 text-sm text-sand/80">{salon.tagline}</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold uppercase tracking-wide text-sand/70">Hours</p>
+          <p className="font-semibold uppercase tracking-wide text-copper">Hours</p>
           <p className="mt-2">{salon.hoursLabel}</p>
-          <p className="mt-4 font-semibold uppercase tracking-wide text-sand/70">Contact</p>
+          <p className="mt-4 font-semibold uppercase tracking-wide text-copper">Contact</p>
           <p className="mt-2">
             <a className="underline decoration-copper/60" href={telUrl()}>
               {salon.phoneDisplay}

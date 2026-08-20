@@ -449,7 +449,7 @@ export function AdminBookings({ initialBookings, services }: Props) {
             type="button"
             onClick={() => setFilter(key)}
             className={`rounded-xl py-2 text-xs font-semibold ${
-              filter === key ? "bg-copper text-white" : "bg-white border border-line"
+              filter === key ? "bg-copper text-ink" : "bg-white border border-line"
             }`}
           >
             {label}

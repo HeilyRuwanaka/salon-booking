@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { salon } from "@/lib/salon.config";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const links = [
   { href: "/", label: "Home" },
@@ -24,10 +24,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="font-display text-2xl tracking-tight text-ink">
-          {salon.name}
-        </Link>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+        <BrandLogo height={44} priority />
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
           {links.map((l) => (
@@ -44,7 +42,6 @@ export function Header() {
           </Link>
         </nav>
 
-        {/* Phone only: ☰ opens page list — same idea as most apps */}
         <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink md:hidden"

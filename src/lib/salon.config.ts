@@ -40,6 +40,7 @@ export const salon = {
   /** Local photos in /public/images — swap for real shop photos later */
   heroImage: "/images/hero.jpg",
   aboutImage: "/images/about.jpg",
+  logoImage: "/images/logo.png",
   /**
    * Placeholder reviews — replace with real customer quotes.
    * Keep 2–3 short lines for the homepage.

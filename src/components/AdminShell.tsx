@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { salon } from "@/lib/salon.config";
 import type { Booking } from "@/lib/types";
 
@@ -70,9 +71,12 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto min-h-[100dvh] max-w-lg bg-stone">
       <header className="sticky top-0 z-30 overflow-visible border-b border-line bg-stone/95 px-4 py-3 backdrop-blur">
-        <div className="flex items-center justify-between">
-          <p className="font-display text-xl">Ranu Admin</p>
-          <button type="button" onClick={logout} className="text-sm text-mute underline">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <BrandLogo href="/admin" height={36} />
+            <p className="truncate text-sm font-semibold tracking-wide text-mute">Admin</p>
+          </div>
+          <button type="button" onClick={logout} className="shrink-0 text-sm text-mute underline">
             Log out
           </button>
         </div>

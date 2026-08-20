@@ -114,7 +114,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
                 active
                   ? "bg-ink text-stone"
                   : done
-                    ? "bg-copper text-white"
+                    ? "bg-copper text-ink"
                     : "bg-sand text-mute"
               }`}
             >
@@ -231,7 +231,7 @@ export function BookingWizard({ services, initialServiceId }: Props) {
                       onClick={() => free && setStartsAt(slot.startsAt)}
                       className={`rounded-xl border px-2 py-3 text-sm transition ${
                         selectedSlot
-                          ? "border-copper bg-copper text-white"
+                          ? "border-copper bg-copper text-ink"
                           : free
                             ? "border-line bg-white hover:border-copper"
                             : "cursor-not-allowed border-transparent bg-sand/70 text-mute/50 line-through"

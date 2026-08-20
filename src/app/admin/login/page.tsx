@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BrandLogo } from "@/components/BrandLogo";
 import { PasswordField } from "@/components/PasswordField";
-import { salon } from "@/lib/salon.config";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -34,8 +34,8 @@ export default function AdminLoginPage() {
 
   return (
     <div className="mx-auto flex min-h-[100dvh] max-w-md flex-col justify-center px-4 py-10">
-      <p className="font-display text-3xl">{salon.name}</p>
-      <h1 className="mt-2 text-xl font-semibold">Owner login</h1>
+      <BrandLogo href="/" height={88} priority className="rounded-sm" />
+      <h1 className="mt-6 text-xl font-semibold">Owner login</h1>
       <p className="mt-2 text-sm text-mute">
         For the phone admin. Use the password from Settings (or the bootstrap
         ADMIN_PASSWORD until you change it once).

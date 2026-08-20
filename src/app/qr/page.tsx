@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PrintButton } from "@/components/PrintButton";
 import { bookQrImageUrl, bookUrl, salon } from "@/lib/salon.config";
@@ -21,8 +22,15 @@ export default function QrPosterPage() {
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep print:hidden">
         Shop poster
       </p>
-      <h1 className="font-display mt-3 text-4xl tracking-tight">{salon.name}</h1>
-      <p className="mt-3 text-mute">Scan to book your appointment</p>
+      <Image
+        src="/images/logo.png"
+        alt={salon.name}
+        width={160}
+        height={220}
+        className="mt-4 h-auto w-28 object-contain sm:w-32"
+        priority
+      />
+      <p className="mt-4 text-mute">Scan to book your appointment</p>
 
       <div className="mt-10 bg-white p-6 shadow-sm ring-1 ring-line">
         {/* eslint-disable-next-line @next/next/no-img-element */}
