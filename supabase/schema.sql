@@ -27,9 +27,16 @@ create table if not exists closed_days (
   reason text
 );
 
+create table if not exists app_settings (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now()
+);
+
 alter table services enable row level security;
 alter table bookings enable row level security;
 alter table closed_days enable row level security;
+alter table app_settings enable row level security;
 
 -- Current menu (11 AM – 11 PM shop hours in app config)
 insert into services (id, name, duration_minutes, price_lkr, is_active, description)
