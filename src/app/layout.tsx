@@ -19,12 +19,12 @@ export const metadata: Metadata = {
   icons: {
     // ?v= busts browser/CDN cache of the old Vercel triangle
     icon: [
-      { url: "/images/favicon-32.png?v=ranu3", sizes: "32x32", type: "image/png" },
-      { url: "/images/favicon-48.png?v=ranu3", sizes: "48x48", type: "image/png" },
-      { url: "/favicon.ico?v=ranu3", sizes: "any" },
+      { url: "/images/favicon-32.png?v=ranu4", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-48.png?v=ranu4", sizes: "48x48", type: "image/png" },
+      { url: "/favicon.ico?v=ranu4", sizes: "any" },
     ],
-    apple: [{ url: "/images/favicon-180.png?v=ranu3", sizes: "180x180", type: "image/png" }],
-    shortcut: "/images/favicon-32.png?v=ranu3",
+    apple: [{ url: "/images/favicon-180.png?v=ranu4", sizes: "180x180", type: "image/png" }],
+    shortcut: "/images/favicon-32.png?v=ranu4",
   },
 };
 
