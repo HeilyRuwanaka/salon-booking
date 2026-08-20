@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAdminLoggedIn } from "@/lib/auth";
 import { buildReport, type ReportRange } from "@/lib/reports";
 import { listBookings, listServices } from "@/lib/store";
+import { isValidIsoDate, sanitizeText } from "@/lib/validate";
 
 export async function GET(request: Request) {
   const ok = await isAdminLoggedIn();
@@ -13,7 +14,10 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Invalid range" }, { status: 400 });
   }
 
-  const dateParam = searchParams.get("date");
+  const dateParam = sanitizeText(searchParams.get("date"), 10);
+  if (dateParam && !isValidIsoDate(dateParam)) {
+    return NextResponse.json({ error: "Invalid date" }, { status: 400 });
+  }
   const anchor = dateParam ? new Date(`${dateParam}T12:00:00+05:30`) : new Date();
   if (Number.isNaN(anchor.getTime())) {
     return NextResponse.json({ error: "Invalid date" }, { status: 400 });

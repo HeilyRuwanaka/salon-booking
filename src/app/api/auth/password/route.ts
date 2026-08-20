@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 import { isAdminLoggedIn } from "@/lib/auth";
 import { changeAdminPassword } from "@/lib/admin-password";
+import { sanitizeText } from "@/lib/validate";
 
 export async function POST(request: Request) {
   if (!(await isAdminLoggedIn())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const currentPassword = String(body.currentPassword || "");
-  const newPassword = String(body.newPassword || "");
+  const body = await request.json().catch(() => ({}));
+  const currentPassword = sanitizeText(body.currentPassword, 200);
+  const newPassword = sanitizeText(body.newPassword, 200);
 
   try {
     await changeAdminPassword({ currentPassword, newPassword });

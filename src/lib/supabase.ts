@@ -1,9 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Server-only Supabase client.
- * Uses the secret key so our API routes can read/write safely.
- * Never import this file into "use client" components.
+ * Server-only Supabase client (service role).
+ * Uses parameterized PostgREST queries via supabase-js — no raw SQL string concat.
+ * Never import this into "use client" components.
  */
 export function getSupabaseAdmin(): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

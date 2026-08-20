@@ -2,13 +2,17 @@ import { NextResponse } from "next/server";
 import { salon } from "@/lib/salon.config";
 import { getService, listBookings, listClosedDays } from "@/lib/store";
 import { getAvailableSlots, getDaySlots } from "@/lib/slots";
+import { isValidIsoDate, isValidServiceId, sanitizeText } from "@/lib/validate";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const serviceId = searchParams.get("serviceId");
-  const date = searchParams.get("date");
+  const serviceId = sanitizeText(searchParams.get("serviceId"), 64);
+  const date = sanitizeText(searchParams.get("date"), 10);
   if (!serviceId || !date) {
     return NextResponse.json({ error: "serviceId and date required" }, { status: 400 });
+  }
+  if (!isValidServiceId(serviceId) || !isValidIsoDate(date)) {
+    return NextResponse.json({ error: "Invalid serviceId or date" }, { status: 400 });
   }
   const service = await getService(serviceId);
   if (!service || !service.isActive) {
