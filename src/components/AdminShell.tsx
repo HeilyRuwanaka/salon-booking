@@ -71,31 +71,29 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto min-h-[100dvh] max-w-lg bg-stone">
       <header
-        className="sticky top-0 z-30 overflow-visible border-t-2 border-copper"
+        className="sticky top-0 z-30 overflow-visible border-t border-copper"
         style={{ backgroundColor: "#010101" }}
       >
-        <div className="flex items-center justify-between gap-3 px-4 py-4">
-          <div className="flex min-w-0 items-center gap-3">
-            <BrandLogo href="/admin" height={80} priority />
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-copper">
-                Admin
-              </p>
-              <p className="truncate text-xs text-stone/55">Owner panel</p>
-            </div>
+        <div className="flex h-14 items-center justify-between gap-3 px-4">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <BrandLogo href="/admin" height={44} priority />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-copper">
+              Admin
+            </p>
           </div>
           <button
             type="button"
             onClick={logout}
-            className="shrink-0 rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-stone/80 hover:border-copper hover:text-copper"
+            className="shrink-0 rounded-full border border-white/20 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-stone/80 hover:border-copper hover:text-copper"
           >
             Log out
           </button>
         </div>
         <nav
-          className="grid grid-cols-5 gap-1 overflow-visible border-t border-white/10 px-2 pb-3 pt-2"
+          className="grid grid-cols-5 gap-1 overflow-visible border-t border-white/10 px-2 py-1.5"
           style={{ backgroundColor: "#010101" }}
-        >          {tabs.map((t) => {
+        >
+          {tabs.map((t) => {
             const active =
               t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
             const showBadge = "badge" in t && t.badge && pendingCount > 0;
@@ -103,7 +101,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={t.href}
                 href={t.href}
-                className={`relative overflow-visible rounded-lg py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide sm:text-[11px] ${
+                className={`relative overflow-visible rounded-md py-2 text-center text-[10px] font-semibold uppercase tracking-wide sm:text-[11px] ${
                   active
                     ? "bg-copper text-ink"
                     : "bg-white/5 text-stone/80 hover:bg-white/10 hover:text-copper"
@@ -112,7 +110,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 {t.label}
                 {showBadge && (
                   <span
-                    className="absolute right-0 top-0 z-20 flex h-[1.15rem] min-w-[1.15rem] -translate-y-1/3 translate-x-1/4 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white shadow-sm"
+                    className="absolute right-0 top-0 z-20 flex h-[1.05rem] min-w-[1.05rem] -translate-y-1/3 translate-x-1/4 items-center justify-center rounded-full px-1 text-[9px] font-bold text-white shadow-sm"
                     style={{ background: "#c0392b" }}
                     aria-label={`${pendingCount} pending bookings`}
                   >

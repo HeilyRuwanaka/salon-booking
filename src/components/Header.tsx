@@ -24,20 +24,20 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-40 border-t-2 border-copper"
+      className="sticky top-0 z-40 border-t border-copper"
       style={{ backgroundColor: "#010101" }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5">
-        <BrandLogo height={88} priority />
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:h-[4.25rem] sm:px-6">
+        <BrandLogo height={52} priority />
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-[13px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                className={`text-[12px] font-medium uppercase tracking-[0.14em] transition-colors ${
                   active ? "text-copper" : "text-stone/85 hover:text-copper"
                 }`}
               >
@@ -47,7 +47,7 @@ export function Header() {
           })}
           <Link
             href="/book"
-            className="rounded-full border border-copper bg-copper px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-copper-deep hover:text-stone hover:border-copper-deep"
+            className="rounded-full border border-copper bg-copper px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-copper-deep hover:text-stone hover:border-copper-deep"
           >
             Book Now
           </Link>
@@ -55,7 +55,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/25 text-stone md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/25 text-stone md:hidden"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
           aria-controls="mobile-nav"
