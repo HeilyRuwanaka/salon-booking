@@ -19,7 +19,7 @@ export function Header() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-stone/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="font-display text-2xl tracking-tight text-ink">
           {salon.name}
@@ -51,14 +51,14 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-line bg-stone px-4 py-3 md:hidden">
+        <div className="border-t border-line bg-surface px-4 py-3 md:hidden">
           <div className="flex flex-col gap-2">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-3 text-base hover:bg-sand"
+                className="rounded-xl px-3 py-3 text-base hover:bg-stone"
               >
                 {l.label}
               </Link>

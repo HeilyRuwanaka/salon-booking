@@ -12,17 +12,17 @@ export default async function ServicesPage() {
   const services = await listServices(true);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div className="bg-surface">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-16">
       <div className="max-w-2xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
           Services
         </p>
-        <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
+        <h1 className="font-display mt-3 text-4xl tracking-tight text-ink sm:text-5xl">
           Time &amp; price, clearly listed
         </h1>
         <p className="mt-4 text-mute">
-          Duration and price for each service. The owner can update this list
-          anytime from the phone admin.
+          Duration and price for each service.
         </p>
       </div>
 
@@ -53,6 +53,7 @@ export default async function ServicesPage() {
           </li>
         ))}
       </ul>
+      </div>
     </div>
   );
 }

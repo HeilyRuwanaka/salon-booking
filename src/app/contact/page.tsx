@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Intro + get in touch (no message form) */}
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <section className="bg-surface">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-16">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
           Contact
         </p>
-        <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl">
+        <h1 className="font-display mt-3 text-4xl tracking-tight text-ink sm:text-5xl">
           Get in touch
         </h1>
 
@@ -80,10 +80,11 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Full-bleed map — like the sample, without a contact form */}
-      <section className="w-full border-t border-line" aria-label="Salon location map">
+      <section className="w-full border-t border-line bg-surface" aria-label="Salon location map">
         <div className="relative h-[min(70vh,520px)] w-full bg-sand">
           <iframe
             title={`${salon.name} on Google Maps`}

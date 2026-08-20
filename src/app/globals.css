@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #121816;
-  --stone: #eef2ef;
-  --sand: #dce5df;
-  --copper: #2f6a56;
-  --copper-deep: #1f4d3e;
-  --mute: #5a6660;
-  --line: rgba(18, 24, 22, 0.12);
+  --ink: #141a17;
+  --stone: #f4f6f4;
+  --sand: #e4ebe6;
+  --copper: #2a6350;
+  --copper-deep: #1a4638;
+  --mute: #5c6761;
+  --line: rgba(20, 26, 23, 0.1);
   --ok: #2f6f4e;
   --warn: #9a6b1f;
   --danger: #9b3b3b;
+  --surface: #ffffff;
   --background: var(--stone);
   --foreground: var(--ink);
 }
@@ -28,21 +29,30 @@
   --color-ok: var(--ok);
   --color-warn: var(--warn);
   --color-danger: var(--danger);
+  --color-surface: var(--surface);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
 
 body {
-  background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(184, 106, 61, 0.12), transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, rgba(26, 23, 20, 0.06), transparent 50%),
-    var(--stone);
+  /* Even, professional base — no warm/cool blotches */
+  background: var(--stone);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
 .font-display {
   font-family: var(--font-display), Georgia, serif;
+}
+
+.section-pad {
+  padding-block: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-pad {
+    padding-block: 5rem;
+  }
 }
 
 .btn {
@@ -55,7 +65,8 @@ body {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .btn:active {
@@ -86,25 +97,30 @@ body {
   color: var(--ink);
 }
 
+.btn-ghost:hover {
+  border-color: var(--copper);
+  background: var(--surface);
+}
+
 .field {
   width: 100%;
   min-height: 2.85rem;
   border: 1px solid var(--line);
-  background: white;
+  background: var(--surface);
   border-radius: 0.85rem;
   padding: 0.7rem 0.9rem;
   color: var(--ink);
 }
 
 .field:focus {
-  outline: 2px solid rgba(184, 106, 61, 0.35);
+  outline: 2px solid rgba(42, 99, 80, 0.28);
   border-color: var(--copper);
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -113,13 +129,13 @@ body {
 }
 
 .animate-rise {
-  animation: rise 0.7s ease both;
+  animation: rise 0.65s ease both;
 }
 
 .animate-rise-delay {
-  animation: rise 0.8s ease 0.12s both;
+  animation: rise 0.75s ease 0.1s both;
 }
 
 .animate-rise-delay-2 {
-  animation: rise 0.85s ease 0.22s both;
+  animation: rise 0.8s ease 0.18s both;
 }
